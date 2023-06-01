@@ -209,8 +209,22 @@ class Breadcrumbs extends AbstractRenderer
         if ($this->getLinkLast()) {
             $html = $this->htmlify($active);
         } else {
-            $html = $active->getLabel();
-            $html = htmlspecialchars($html, ENT_COMPAT, 'UTF-8');
+            $label = $active->getLabel();
+            $title = $active->getTitle();
+
+            // get attribs for anchor element
+            $attribs = array_merge(
+                [
+                    'id' => $active->getId(),
+                    'title' => $title,
+                    'class' => $active->getClass(),
+                ],
+                $active->getCustomHtmlAttribs()
+            );
+
+            $html = '<span' . $this->_htmlAttribs($attribs) . '>'
+                . htmlspecialchars($label, ENT_COMPAT, 'UTF-8')
+                . '</span>';
         }
 
         // walk back to root
