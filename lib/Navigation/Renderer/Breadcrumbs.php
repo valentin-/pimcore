@@ -215,7 +215,6 @@ class Breadcrumbs extends AbstractRenderer
             // get attribs for anchor element
             $attribs = array_merge(
                 [
-                    'id' => $active->getId(),
                     'title' => $title,
                     'class' => $active->getClass(),
                 ],
