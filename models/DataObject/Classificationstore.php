@@ -472,7 +472,9 @@ class Classificationstore extends Model\AbstractModel implements DirtyIndicatorI
         $activeGroups = $classificationStore->getActiveGroups();
         foreach (array_keys($activeGroups) as $groupId) {
             $groupConfig = $classificationStore->getGroupConfigById($groupId);
-            $groups[] = $classificationStore->createGroup($classificationStore, $groupConfig);
+            if ($groupConfig) {
+                $groups[] = $classificationStore->createGroup($classificationStore, $groupConfig);
+            }
         }
 
         return $groups;
